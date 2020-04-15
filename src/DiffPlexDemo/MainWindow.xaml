@@ -1,0 +1,54 @@
+﻿<Window
+   x:Class="DiffPlexDemo.MainWindow"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:diffplex="clr-namespace:DiffPlex.Wpf.Controls;assembly=DiffPlex.Wpf"
+   xmlns:local="clr-namespace:DiffPlexDemo"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   Title="MainWindow"
+   Width="800"
+   Height="350"
+   FontFamily="Segoe UI Emoji"
+   FontSize="14"
+   mc:Ignorable="d">
+   <Window.Resources>
+      <local:RichTextVmToFlowDocumentConverter x:Key="RichTextVmToFlowDocumentConverter" />
+   </Window.Resources>
+   <Window.DataContext>
+      <local:MainWindowViewModel />
+   </Window.DataContext>
+   <TabControl>
+      <TabItem Header="Side by Side">
+         <diffplex:DiffViewer
+            NewText="{Binding NewText}"
+            NewTextHeader="Episode 4"
+            OldText="{Binding OldText}"
+            OldTextHeader="Episode 1" />
+      </TabItem>
+      <TabItem Header="Inline">
+         <diffplex:DiffViewer
+            x:Name="inlineDiffViewer"
+            NewText="{Binding NewText}"
+            NewTextHeader="Episode 4"
+            OldText="{Binding OldText}"
+            OldTextHeader="Episode 1" />
+      </TabItem>
+      <TabItem Header="Original">
+   <Grid>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="Auto" />
+         <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <RichTextBox Grid.Column="0" local:RichTextBoxHelper.Document="{Binding DiffModel.OldText, Converter={StaticResource RichTextVmToFlowDocumentConverter}}" />
+      <TextBlock
+         Grid.Column="1"
+         VerticalAlignment="Center"
+         FontSize="24"
+         Text="👉" />
+      <RichTextBox Grid.Column="2" local:RichTextBoxHelper.Document="{Binding DiffModel.NewText, Converter={StaticResource RichTextVmToFlowDocumentConverter}}" />
+   </Grid>
+      </TabItem>
+   </TabControl>
+</Window>
