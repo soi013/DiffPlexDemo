@@ -20,10 +20,9 @@ namespace DiffPlexDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-public MainWindow()
-{
-    InitializeComponent();
-    this.inlineDiffViewer.ShowInline();
-}
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

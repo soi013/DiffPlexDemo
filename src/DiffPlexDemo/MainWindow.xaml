@@ -28,7 +28,7 @@
       </TabItem>
       <TabItem Header="Inline">
          <diffplex:DiffViewer
-            x:Name="inlineDiffViewer"
+            IsSideBySide ="false"
             NewText="{Binding NewText}"
             NewTextHeader="Episode 4"
             OldText="{Binding OldText}"
